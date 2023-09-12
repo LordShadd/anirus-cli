@@ -1,10 +1,11 @@
 use crate::types::SourcePlatform;
 use anyhow::Result;
 use async_trait::async_trait;
+use scraper::Html;
 
 pub struct FetchedData {
     pub raw: String,
-    pub html: String,
+    pub html: Html,
 }
 
 impl FetchedData {
@@ -20,7 +21,7 @@ impl FetchedData {
 pub trait Fetchable {
     const SOURCE_PLATFORM: SourcePlatform;
 
-    fn fetch_search(&self, query: &str) -> Result<FetchedData>;
-    fn fetch_anime(&self, anime_id: &str) -> Result<FetchedData>;
-    fn fetch_media(&self, media_id: &str) -> Result<FetchedData>;
+    async fn fetch_search(&self, query: &str) -> Result<FetchedData>;
+    async fn fetch_anime(&self, anime_id: &str) -> Result<FetchedData>;
+    async fn fetch_media(&self, media_id: &str) -> Result<FetchedData>;
 }

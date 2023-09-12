@@ -19,6 +19,7 @@ pub struct ScrapedSearch {
 #[derive(Debug)]
 pub struct ScrapedSearchAnime {
     pub title: String,
+    pub page_url: String,
     pub poster_url: String,
 }
 

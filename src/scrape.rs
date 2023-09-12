@@ -11,13 +11,13 @@ pub enum ScrapedAnimeType {
 
 #[derive(Debug)]
 pub struct ScrapedSearch {
-    pub animes: Vec<ScrapedAnimeSearch>,
+    pub animes: Vec<ScrapedSearchAnime>,
     pub current_page: u32,
     pub total_pages: u32,
 }
 
 #[derive(Debug)]
-pub struct ScrapedAnimeSearch {
+pub struct ScrapedSearchAnime {
     pub title: String,
     pub poster_url: String,
 }

@@ -3,22 +3,26 @@ use async_trait::async_trait;
 
 use crate::{fetch::FetchedData, types::SourcePlatform};
 
+#[derive(Debug)]
 pub enum ScrapedAnimeType {
     Series,
     Movie,
 }
 
+#[derive(Debug)]
 pub struct ScrapedSearch {
     pub animes: Vec<ScrapedAnimeSearch>,
     pub current_page: u32,
     pub total_pages: u32,
 }
 
+#[derive(Debug)]
 pub struct ScrapedAnimeSearch {
     pub title: String,
     pub poster_url: String,
 }
 
+#[derive(Debug)]
 pub struct ScrapedAnime {
     pub source_id: String,
     pub title: String,
@@ -30,18 +34,21 @@ pub struct ScrapedAnime {
     pub movies: Option<Vec<ScrapedAnimeMovie>>,
 }
 
+#[derive(Debug)]
 pub struct ScrapedAnimeEpisode {
     pub index: u32,
     pub label: String,
     pub page_url: String,
 }
 
+#[derive(Debug)]
 pub struct ScrapedAnimeMovie {
     pub index: usize,
     pub label: String,
     pub page_url: String,
 }
 
+#[derive(Debug)]
 pub struct ScrapedMedia {
     pub label: String,
     pub media_url: String,
@@ -51,7 +58,7 @@ pub struct ScrapedMedia {
 pub trait Scrapable {
     const SOURCE_PLATFORM: SourcePlatform;
 
-    async fn scrape_search(data: &FetchedData) -> Result<ScrapedSearch>;
-    async fn scrape_anime(data: &FetchedData) -> Result<ScrapedAnime>;
-    async fn scrape_media(data: &FetchedData) -> Result<ScrapedMedia>;
+    async fn scrape_search(data: FetchedData) -> Result<ScrapedSearch>;
+    async fn scrape_anime(data: FetchedData) -> Result<ScrapedAnime>;
+    async fn scrape_media(data: FetchedData) -> Result<ScrapedMedia>;
 }

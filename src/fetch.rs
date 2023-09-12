@@ -4,6 +4,7 @@ use async_trait::async_trait;
 use reqwest::Url;
 use scraper::Html;
 
+#[derive(Debug)]
 pub struct FetchedData {
     pub source_url: Url,
     pub raw: String,

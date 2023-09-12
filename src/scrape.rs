@@ -26,26 +26,20 @@ pub struct ScrapedAnime {
     pub release_year: String,
     pub synopsis: String,
     pub anime_type: ScrapedAnimeType,
-    pub episodes: Vec<ScrapedAnimeEpisode>,
+    pub episodes: Option<Vec<ScrapedAnimeEpisode>>,
+    pub movies: Option<Vec<ScrapedAnimeMovie>>,
 }
 
 pub struct ScrapedAnimeEpisode {
-    pub index: usize,
+    pub index: u32,
     pub label: String,
-    pub medias: Vec<ScrapedAnimeMedia>,
     pub page_url: String,
 }
 
 pub struct ScrapedAnimeMovie {
     pub index: usize,
     pub label: String,
-    pub medias: Vec<ScrapedAnimeMedia>,
     pub page_url: String,
-}
-
-pub struct ScrapedAnimeMedia {
-    pub id: String,
-    pub url: String,
 }
 
 pub struct ScrapedMedia {

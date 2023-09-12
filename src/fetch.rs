@@ -20,6 +20,8 @@ impl FetchedData {
     }
 }
 
+unsafe impl Send for FetchedData {}
+
 #[async_trait]
 pub trait Fetchable {
     const SOURCE_PLATFORM: SourcePlatform;

@@ -22,7 +22,7 @@ pub struct ScrapedAnimeSearch {
 pub struct ScrapedAnime {
     pub source_id: String,
     pub title: String,
-    pub original_title: String,
+    pub original_title: Option<String>,
     pub release_year: String,
     pub synopsis: String,
     pub anime_type: ScrapedAnimeType,

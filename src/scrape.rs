@@ -28,7 +28,7 @@ pub struct ScrapedAnime {
     pub source_id: String,
     pub title: String,
     pub original_title: Option<String>,
-    pub release_year: String,
+    pub release_year: u32,
     pub synopsis: String,
     pub anime_type: ScrapedAnimeType,
     pub episodes: Option<Vec<ScrapedAnimeEpisode>>,

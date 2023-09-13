@@ -28,11 +28,9 @@ impl Fetchable for AnimeFire {
         ))?;
 
         let res = reqwest::get(source_url.as_str()).await?;
+        let html = Html::parse_document(&res.text().await?);
 
-        let raw = res.text().await?;
-        let html = Html::parse_document(&raw);
-
-        Ok(FetchedData::new(source_url, &raw, html))
+        Ok(FetchedData::new(source_url, html))
     }
 
     async fn fetch_anime(anime_id: &str) -> Result<FetchedData> {
@@ -40,11 +38,9 @@ impl Fetchable for AnimeFire {
             .join(&format!("animes/{}-todos-os-episodios", anime_id))?;
 
         let res = reqwest::get(source_url.as_str()).await?;
+        let html = Html::parse_document(&res.text().await?);
 
-        let raw = res.text().await?;
-        let html = Html::parse_document(&raw);
-
-        Ok(FetchedData::new(source_url, &raw, html))
+        Ok(FetchedData::new(source_url, html))
     }
 
     async fn fetch_media(anime_id: &str, media_id: &str) -> Result<FetchedData> {
@@ -52,9 +48,12 @@ impl Fetchable for AnimeFire {
             .join(&format!("animes/{}/{}", anime_id, media_id))?;
 
         let res = reqwest::get(source_url.as_str()).await?;
+        let html = Html::parse_document(&res.text().await?);
 
-        let raw = res.text().await?;
-        let html = Html::parse_document(&raw);
+        Ok(FetchedData::new(source_url, html))
+    }
+}
+
 
         Ok(FetchedData::new(source_url, &raw, html))
     }

@@ -7,15 +7,13 @@ use scraper::Html;
 #[derive(Debug)]
 pub struct FetchedData {
     pub source_url: Url,
-    pub raw: String,
     pub html: Html,
 }
 
 impl FetchedData {
-    pub fn new(source_url: Url, raw: &str, html: Html) -> Self {
+    pub fn new(source_url: Url, html: Html) -> Self {
         FetchedData {
             source_url,
-            raw: raw.into(),
             html,
         }
     }

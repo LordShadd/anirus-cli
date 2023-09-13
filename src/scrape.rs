@@ -52,7 +52,7 @@ pub struct ScrapedAnimeMovie {
 #[derive(Debug)]
 pub struct ScrapedMedia {
     pub label: String,
-    pub media_url: String,
+    pub source_url: String,
 }
 
 #[async_trait]

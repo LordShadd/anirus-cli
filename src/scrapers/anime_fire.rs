@@ -1,19 +1,47 @@
-use std::{fmt::format, str::FromStr};
+use std::{collections::HashMap, fmt::format, str::FromStr};
 
-use anyhow::Result;
+use anyhow::{Error, Ok, Result};
 use async_trait::async_trait;
 use reqwest::Url;
-use scraper::Html;
+use scraper::{Html, Selector};
+use unidecode::unidecode;
 
 use crate::{
     fetch::{Fetchable, FetchedData},
+    scrape::{
+        Scrapable, ScrapedAnime, ScrapedAnimeEpisode, ScrapedAnimeType, ScrapedMedia,
+        ScrapedSearch, ScrapedSearchAnime,
+    },
     types::SourcePlatform,
 };
 
-pub struct AnimeFire;
+pub struct AnimeFireScraper;
+
+impl AnimeFireScraper {
+    fn parse_key(key: &str) -> Option<String> {
+        let parsed_key = unidecode(key)
+            .to_lowercase()
+            .trim()
+            .replace(" ", "_")
+            .chars()
+            .filter(|c| c.is_alphanumeric() || c == &'_')
+            .collect();
+
+        if key.is_empty() {
+            return None;
+        }
+
+        Some(parsed_key)
+    }
+}
+
+struct AnimeFireAnimeInfo {
+    release_day: String,
+    release_year: String,
+}
 
 #[async_trait]
-impl Fetchable for AnimeFire {
+impl Fetchable for AnimeFireScraper {
     const SOURCE_PLATFORM: SourcePlatform = SourcePlatform::AnimeFire;
 
     fn anime_id_from_url(url: Url) -> Option<String> {
@@ -53,9 +81,3 @@ impl Fetchable for AnimeFire {
         Ok(FetchedData::new(source_url, html))
     }
 }
-
-
-        Ok(FetchedData::new(source_url, &raw, html))
-    }
-}
-

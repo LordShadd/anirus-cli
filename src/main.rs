@@ -7,7 +7,7 @@ use scrape::Scrapable;
 
 mod types;
 mod fetch;
-mod handle;
+mod anime_handler;
 mod models;
 mod scrapers;
 mod scrape;

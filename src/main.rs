@@ -1,9 +1,17 @@
+use std::time::Instant;
+
 use anyhow::Result;
+use fetch::Fetchable;
+use scrapers::anime_fire::AnimeFireScraper;
+use scrape::Scrapable;
 
 mod types;
 mod fetch;
+mod handle;
+mod models;
+mod scrapers;
 mod scrape;
-mod platforms;
+mod types;
 
 #[tokio::main]
 async fn main() -> Result<()> {

@@ -59,7 +59,7 @@ pub struct ScrapedMedia {
 pub trait Scrapable {
     const SOURCE_PLATFORM: SourcePlatform;
 
-    async fn scrape_search(data: FetchedData) -> Result<ScrapedSearch>;
-    async fn scrape_anime(data: FetchedData) -> Result<ScrapedAnime>;
-    async fn scrape_media(data: FetchedData) -> Result<ScrapedMedia>;
+    async fn scrape_search(&self, data: FetchedData) -> Result<ScrapedSearch>;
+    async fn scrape_anime(&self, data: FetchedData) -> Result<ScrapedAnime>;
+    async fn scrape_media(&self, data: FetchedData) -> Result<ScrapedMedia>;
 }

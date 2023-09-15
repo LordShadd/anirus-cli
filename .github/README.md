@@ -1,3 +1,4 @@
-# AniRus Scraper
+# AniRus CLI
 
-Este sistema de webscraping está em processo de desenvolvimento com o objetivo de coletar informações e links para assistir animes, para a extração desses dados. Este repositório faz parte de outro software em desenvolvimento.
+Uma CLI para baixar animes. :slight_smile:
+s

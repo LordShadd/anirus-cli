@@ -12,10 +12,7 @@ pub struct FetchedData {
 
 impl FetchedData {
     pub fn new(source_url: Url, html: Html) -> Self {
-        FetchedData {
-            source_url,
-            html,
-        }
+        FetchedData { source_url, html }
     }
 }
 
@@ -25,9 +22,9 @@ unsafe impl Send for FetchedData {}
 pub trait Fetchable {
     const SOURCE_PLATFORM: SourcePlatform;
 
-    fn anime_id_from_url(url: Url) -> Option<String>;
+    fn anime_id_from_url(&self, url: Url) -> Option<String>;
 
-    async fn fetch_search(query: &str, page: u32) -> Result<FetchedData>;
-    async fn fetch_anime(anime_id: &str) -> Result<FetchedData>;
-    async fn fetch_media(anime_id: &str, media_id: &str) -> Result<FetchedData>;
+    async fn fetch_search(&self, query: &str, page: u32) -> Result<FetchedData>;
+    async fn fetch_anime(&self, anime_id: &str) -> Result<FetchedData>;
+    async fn fetch_media(&self, anime_id: &str, media_id: &str) -> Result<FetchedData>;
 }

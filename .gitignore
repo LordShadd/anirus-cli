@@ -1,5 +1,7 @@
-.env
 /target
+/storage/*
+
+.env
 .idea
 
 !*/**/.gitkeep

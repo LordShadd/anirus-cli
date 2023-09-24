@@ -50,11 +50,11 @@ struct AnimeFireAnimeInfo {
 impl Fetchable for AnimeFireScraper {
     const SOURCE_PLATFORM: SourcePlatform = SourcePlatform::AnimeFire;
 
-    fn anime_id_from_url(&self, url: Url) -> Option<String> {
+    fn anime_id_from_url(url: Url) -> Option<String> {
         None
     }
 
-    async fn fetch_search(&self, query: &str, page: u32) -> Result<FetchedData> {
+    async fn fetch_search(query: &str, page: u32) -> Result<FetchedData> {
         let source_url = Url::from_str("https://animefire.vip")?.join(&format!(
             "pesquisar/{}/{}",
             query.replace(" ", "-"),
@@ -67,7 +67,7 @@ impl Fetchable for AnimeFireScraper {
         Ok(FetchedData::new(source_url, html))
     }
 
-    async fn fetch_anime(&self, anime_id: &str) -> Result<FetchedData> {
+    async fn fetch_anime(anime_id: &str) -> Result<FetchedData> {
         let source_url = Url::from_str("https://animefire.vip")?
             .join(&format!("animes/{}-todos-os-episodios", anime_id))?;
 
@@ -77,7 +77,7 @@ impl Fetchable for AnimeFireScraper {
         Ok(FetchedData::new(source_url, html))
     }
 
-    async fn fetch_media(&self, anime_id: &str, media_id: &str) -> Result<FetchedData> {
+    async fn fetch_media(anime_id: &str, media_id: &str) -> Result<FetchedData> {
         let source_url = Url::from_str("https://animefire.vip")?
             .join(&format!("animes/{}/{}", anime_id, media_id))?;
 
@@ -92,7 +92,7 @@ impl Fetchable for AnimeFireScraper {
 impl Scrapable for AnimeFireScraper {
     const SOURCE_PLATFORM: SourcePlatform = SourcePlatform::AnimeFire;
 
-    async fn scrape_search(&self, data: FetchedData) -> Result<ScrapedSearch> {
+    async fn scrape_search(data: FetchedData) -> Result<ScrapedSearch> {
         let document = data.html;
 
         let anime_selector = Selector::parse("div>article>a").unwrap();
@@ -122,7 +122,7 @@ impl Scrapable for AnimeFireScraper {
         })
     }
 
-    async fn scrape_anime(&self, data: FetchedData) -> Result<ScrapedAnime> {
+    async fn scrape_anime(data: FetchedData) -> Result<ScrapedAnime> {
         let document = data.html;
 
         let title_selector = Selector::parse("div.div_anime_names>h1").unwrap();
@@ -178,7 +178,7 @@ impl Scrapable for AnimeFireScraper {
         })
     }
 
-    async fn scrape_media(&self, data: FetchedData) -> Result<ScrapedMedia> {
+    async fn scrape_media(data: FetchedData) -> Result<ScrapedMedia> {
         let document = data.html;
 
         let video_selector = Selector::parse("video").unwrap();

@@ -18,12 +18,6 @@ use crate::{
 pub struct AnimeFireScraper;
 
 impl AnimeFireScraper {
-    pub fn new() -> Self {
-        AnimeFireScraper
-    }
-}
-
-impl AnimeFireScraper {
     fn parse_key(key: &str) -> Option<String> {
         let parsed_key = unidecode(key)
             .to_lowercase()
